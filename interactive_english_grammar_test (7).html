@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختبار قواعد اللغة الإنجليزية التفاعلي - Comparatives & Superlatives</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Cairo & Poppins) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8fafc;
+    }
+    .en-text {
+      font-family: 'Poppins', sans-serif;
+      direction: ltr;
+    }
+    .en-inline {
+      font-family: 'Poppins', sans-serif;
+      direction: ltr;
+      display: inline-block;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .card-shadow {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- شريط الترويسة العلوي -->
+  <header class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white shadow-lg sticky top-0 z-40 no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm shadow-inner text-2xl">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <h1 class="text-lg md:text-xl font-black">اختبار قواعد اللغة الإنجليزية</h1>
+          <p class="text-xs text-amber-100 en-inline font-medium">Grammar 2 Exercises: Comparatives & Superlatives</p>
+        </div>
+      </div>
+      
+      <!-- إحصائيات سريعة ومؤشر التقدم -->
+      <div class="flex items-center gap-4 bg-black/15 px-4 py-1.5 rounded-xl backdrop-blur-sm text-sm">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-amber-300"></i>
+          <span>المحلول: <strong id="header-answered-count">0</strong> / <strong>36</strong></span>
+        </div>
+        <div class="w-24 bg-white/30 rounded-full h-2.5 overflow-hidden">
+          <div id="header-progress-bar" class="bg-white h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+    <!-- لوحة الأسئلة الجانبية (Question Navigation Drawer/Sidebar) -->
+    <aside class="lg:col-span-1 space-y-4 no-print">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 sticky top-20">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h2 class="font-bold text-slate-700 flex items-center gap-2 text-base">
+            <i class="fa-solid fa-table-cells-large text-amber-500"></i> لوحة الأسئلة
+          </h2>
+          <span class="text-xs font-semibold bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full border border-amber-200">
+            3 أجزاء
+          </span>
+        </div>
+
+        <!-- تبويبات سريعة للتنقل بين الأقسام -->
+        <div class="mt-4 space-y-3">
+          <div>
+            <div class="flex justify-between items-center text-xs font-bold text-slate-500 mb-1.5">
+              <span>السؤال الأول: اختر الإجابة (8)</span>
+              <span id="nav-q1-count" class="text-slate-400">0/8</span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5" id="nav-q1-grid">
+              <!-- أزرار السؤال 1 تتولد تلقائياً -->
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-500 mb-1.5">
+              <span>السؤال الثاني: أكمل الجمل (8)</span>
+              <span id="nav-q2-count" class="text-slate-400">0/8</span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5" id="nav-q2-grid">
+              <!-- أزرار السؤال 2 تتولد تلقائياً -->
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-500 mb-1.5">
+              <span>السؤال الثالث: جدول المقارنة (20)</span>
+              <span id="nav-q3-count" class="text-slate-400">0/20</span>
+            </div>
+            <div class="grid grid-cols-5 gap-1" id="nav-q3-grid">
+              <!-- أزرار السؤال 3 تتولد تلقائياً -->
+            </div>
+          </div>
+        </div>
+
+        <!-- أزرار التحكم باللوحة -->
+        <div class="mt-5 pt-3 border-t border-slate-100 space-y-2">
+          <button onclick="submitQuiz()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-2.5 px-4 rounded-xl shadow-md shadow-emerald-200 transition duration-200 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> تسليم الاختبار وإنهاء
+          </button>
+          <button onclick="resetQuizPrompt()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold py-2 px-4 rounded-xl transition duration-150 text-xs flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrow-rotate-right"></i> إعادة البدء من جديد
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- منطقة الأسئلة الرئيسية والنتائج -->
+    <section class="lg:col-span-3 space-y-6">
+
+      <!-- بطاقة بيانات الطالب الاختيارية -->
+      <div id="student-meta-card" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-lg font-bold">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div>
+            <label for="studentNameInput" class="block text-xs text-slate-500 font-medium">اسم الطالب / الطالبة (اختياري للشهادة):</label>
+            <input type="text" id="studentNameInput" placeholder="أدخل اسمك الكريم..." class="text-sm font-bold text-slate-700 border-b border-dashed border-slate-300 focus:border-amber-500 outline-none pb-0.5 w-60">
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+          <i class="fa-regular fa-clock me-1"></i> زمن الاختبار: مفتوح للتدرب
+        </div>
+      </div>
+
+      <!-- حاوية الاختبار (الأسئلة) -->
+      <div id="quiz-container" class="space-y-6">
+
+        <!-- ======================= السؤال الأول ======================= -->
+        <div id="section-1" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-shadow">
+          <!-- ترويسة السؤال الأول متموضعة في المنتصف بدقة -->
+          <div class="bg-amber-50/80 border-b border-amber-200/80 p-5 md:p-6 text-center flex flex-col items-center justify-center gap-2">
+            <div class="flex items-center justify-center gap-2.5 flex-wrap" dir="ltr">
+              <h2 class="text-lg md:text-xl font-black text-slate-800 en-text">Choose the correct answer:</h2>
+              <span class="bg-amber-500 text-white font-extrabold text-xs md:text-sm px-3 py-1 rounded-lg shadow-sm">Ex. 1</span>
+            </div>
+            <p class="text-xs md:text-sm text-slate-600 font-semibold">اختر الإجابة الصحيحة المناسبة لكل فراغ (8 درجات)</p>
+            <span class="text-xs font-semibold px-3 py-0.5 bg-white rounded-full text-amber-700 border border-amber-200 shadow-xs mt-1">
+              8 أسئلة اختيار من متعدد
+            </span>
+          </div>
+
+          <!-- عناصر السؤال 1 -->
+          <div class="p-4 md:p-6 space-y-6" id="ex1-questions-list">
+            <!-- تتولد ديناميكياً لتسهيل الفحص والتنسيق -->
+          </div>
+        </div>
+
+        <!-- ======================= السؤال الثاني ======================= -->
+        <div id="section-2" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-shadow">
+          <!-- ترويسة السؤال الثاني متموضعة في المنتصف -->
+          <div class="bg-amber-50/80 border-b border-amber-200/80 p-5 md:p-6 text-center flex flex-col items-center justify-center gap-2">
+            <div class="flex items-center justify-center gap-2.5 flex-wrap" dir="ltr">
+              <h2 class="text-lg md:text-xl font-black text-slate-800 en-text">Complete the sentences using the correct comparative form.</h2>
+              <span class="bg-amber-500 text-white font-extrabold text-xs md:text-sm px-3 py-1 rounded-lg shadow-sm">Ex. 2</span>
+            </div>
+            <p class="text-xs md:text-sm text-slate-600 font-semibold">أكمل الجمل بصيغة المقارنة الصحيحة للصفة بين القوسين (8 درجات)</p>
+            <span class="text-xs font-semibold px-3 py-0.5 bg-white rounded-full text-amber-700 border border-amber-200 shadow-xs mt-1">
+              8 جمل إكمال
+            </span>
+          </div>
+
+          <!-- قائمة السؤال 2 -->
+          <div class="p-4 md:p-6 space-y-4" id="ex2-questions-list">
+            <!-- تتولد بواسطة الـ JS -->
+          </div>
+        </div>
+
+        <!-- ======================= السؤال الثالث ======================= -->
+        <div id="section-3" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-shadow">
+          <!-- ترويسة السؤال الثالث متموضعة في المنتصف -->
+          <div class="bg-amber-50/80 border-b border-amber-200/80 p-5 md:p-6 text-center flex flex-col items-center justify-center gap-2">
+            <div class="flex items-center justify-center gap-2.5 flex-wrap" dir="ltr">
+              <h2 class="text-lg md:text-xl font-black text-slate-800 en-text">Complete the table with the Comparative and Superlative forms.</h2>
+              <span class="bg-amber-500 text-white font-extrabold text-xs md:text-sm px-3 py-1 rounded-lg shadow-sm">Ex. 3</span>
+            </div>
+            <p class="text-xs md:text-sm text-slate-600 font-semibold">أكمل الجدول بصيغتي المقارنة والتفضيل لكل صفة (20 درجة)</p>
+            <span class="text-xs font-semibold px-3 py-0.5 bg-white rounded-full text-amber-700 border border-amber-200 shadow-xs mt-1">
+              10 صفات × 2 = 20 درجة
+            </span>
+          </div>
+
+          <!-- جدول السؤال 3 -->
+          <div class="p-4 md:p-6 overflow-x-auto">
+            <table class="w-full text-left border-collapse rounded-xl overflow-hidden border border-amber-200" dir="ltr">
+              <thead>
+                <tr class="bg-gradient-to-r from-amber-700 to-amber-800 text-white text-sm md:text-base">
+                  <th class="p-3 font-bold w-1/3 border-r border-amber-600 en-text text-left">Adjective</th>
+                  <th class="p-3 font-bold w-1/3 border-r border-amber-600 en-text text-left">Comparative</th>
+                  <th class="p-3 font-bold w-1/3 en-text text-left">Superlative</th>
+                </tr>
+              </thead>
+              <tbody id="ex3-table-body" class="divide-y divide-amber-100 bg-amber-50/20 text-sm md:text-base font-medium">
+                <!-- صفوف الجدول تتولد تلقائياً بالـ JS -->
+              </tbody>
+            </table>
+            <p class="text-xs text-slate-400 mt-3 text-right">
+              * ملاحظة في صيغة التفضيل (Superlative): يمكنك كتابة الصفة مع أداة (the) أو بدونها، وسيقبلها النظام تلقائياً.
+            </p>
+          </div>
+        </div>
+
+        <!-- زر التسليم النهائي أسفل الأسئلة -->
+        <div class="pt-4 flex justify-center md:justify-end no-print">
+          <button onclick="submitQuiz()" class="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-lg rounded-2xl shadow-lg shadow-emerald-200 hover:shadow-xl transition-all duration-200 flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-xl"></i>
+            <span>اعتماد وتسليم الإجابات</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ======================= شاشة النتيجة والتغذية الراجعة ======================= -->
+      <div id="result-view" class="hidden space-y-6">
+        
+        <!-- بطاقة النتيجة والاحتفال -->
+        <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-100 text-center relative overflow-hidden card-shadow">
+          <!-- زخرفة خلفية -->
+          <div class="absolute -top-16 -left-16 w-48 h-48 bg-amber-100 rounded-full blur-2xl opacity-60"></div>
+          <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-emerald-100 rounded-full blur-2xl opacity-60"></div>
+
+          <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+            
+            <div id="score-badge-icon" class="w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-4xl shadow-inner mb-2">
+              <!-- رمز التقدير -->
+            </div>
+
+            <div class="space-y-1">
+              <h2 id="result-greeting" class="text-2xl md:text-3xl font-black text-slate-800">أحسنت صنعاً!</h2>
+              <p id="student-display-name" class="text-slate-500 font-semibold text-sm"></p>
+            </div>
+
+            <!-- النتيجة الرقمية والنسبة -->
+            <div class="p-5 bg-gradient-to-br from-slate-50 to-amber-50/50 rounded-2xl border border-amber-100/60 inline-flex flex-col sm:flex-row items-center gap-6 justify-center">
+              <div class="text-center">
+                <span class="text-xs uppercase text-slate-400 font-bold block mb-1">الدرجة النهائية</span>
+                <span class="text-3xl md:text-4xl font-black text-amber-600">
+                  <span id="final-score-num">0</span> <span class="text-xl text-slate-400 font-normal">/ 36</span>
+                </span>
+              </div>
+              <div class="h-10 w-px bg-slate-200 hidden sm:block"></div>
+              <div class="text-center">
+                <span class="text-xs uppercase text-slate-400 font-bold block mb-1">النسبة المئوية</span>
+                <span id="final-percentage-num" class="text-3xl md:text-4xl font-black text-emerald-600">0%</span>
+              </div>
+              <div class="h-10 w-px bg-slate-200 hidden sm:block"></div>
+              <div class="text-center">
+                <span class="text-xs uppercase text-slate-400 font-bold block mb-1">التقدير العام</span>
+                <span id="final-rank-text" class="text-xl md:text-2xl font-black text-slate-700">ممتاز</span>
+              </div>
+            </div>
+
+            <!-- رسالة التحفيز -->
+            <div id="motivation-box" class="p-4 rounded-xl text-sm md:text-base leading-relaxed font-bold border transition-all">
+              <!-- نص التحفيز المخصص -->
+            </div>
+
+            <!-- تفصيل درجات كل سؤال -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 text-right">
+              <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <span class="text-xs text-slate-500 block font-semibold">السؤال الأول (اختيار)</span>
+                <span class="text-base font-black text-slate-800" id="subscore-q1">0 / 8</span>
+              </div>
+              <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <span class="text-xs text-slate-500 block font-semibold">السؤال الثاني (إكمال)</span>
+                <span class="text-base font-black text-slate-800" id="subscore-q2">0 / 8</span>
+              </div>
+              <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <span class="text-xs text-slate-500 block font-semibold">السؤال الثالث (جدول)</span>
+                <span class="text-base font-black text-slate-800" id="subscore-q3">0 / 20</span>
+              </div>
+            </div>
+
+            <!-- أزرار الإجراءات للنتيجة (طباعة / إعادة / مراجعة) -->
+            <div class="pt-4 flex flex-wrap items-center justify-center gap-3 no-print">
+              <button onclick="window.print()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold text-sm shadow-md flex items-center gap-2 transition">
+                <i class="fa-solid fa-print"></i> طباعة النتيجة / التقرير
+              </button>
+              <button onclick="scrollToFeedback()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold text-sm shadow-md flex items-center gap-2 transition">
+                <i class="fa-solid fa-clipboard-check"></i> استعراض التغذية الراجعة
+              </button>
+              <button onclick="retakeQuiz()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm border border-slate-200 flex items-center gap-2 transition">
+                <i class="fa-solid fa-rotate-left"></i> إعادة الاختبار
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- قسم التغذية الراجعة التفصيلية (Detailed Feedback) -->
+        <div id="detailed-feedback-container" class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+          <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb text-amber-500"></i> التغذية الراجعة والمراجعة التفصيلية
+              </h3>
+              <p class="text-xs text-slate-500 mt-1">راجع كل إجابة مع بيان الخطأ والصواب وقاعدة الحل لكل فقرة لتثبيت القاعدة.</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-semibold">
+              <span class="flex items-center gap-1 text-emerald-600"><i class="fa-solid fa-circle-check"></i> صحيح</span>
+              <span class="flex items-center gap-1 text-rose-500"><i class="fa-solid fa-circle-xmark"></i> خطأ</span>
+            </div>
+          </div>
+
+          <!-- مراجعة السؤال 1 -->
+          <div class="space-y-3">
+            <h4 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-amber-500 text-white text-xs flex items-center justify-center font-black">1</span>
+              <span>تغذية راجعة: السؤال الأول (Choose the correct answer)</span>
+            </h4>
+            <div id="feedback-q1-list" class="space-y-2"></div>
+          </div>
+
+          <!-- مراجعة السؤال 2 -->
+          <div class="space-y-3 pt-4 border-t border-slate-100">
+            <h4 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-amber-500 text-white text-xs flex items-center justify-center font-black">2</span>
+              <span>تغذية راجعة: السؤال الثاني (Complete the sentences)</span>
+            </h4>
+            <div id="feedback-q2-list" class="space-y-2"></div>
+          </div>
+
+          <!-- مراجعة السؤال 3 -->
+          <div class="space-y-3 pt-4 border-t border-slate-100">
+            <h4 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-md bg-amber-500 text-white text-xs flex items-center justify-center font-black">3</span>
+              <span>تغذية راجعة: السؤال الثالث (Comparative & Superlative Table)</span>
+            </h4>
+            <div id="feedback-q3-list" class="overflow-x-auto"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- نافذة تأكيد منبثقة بسيطة (Modal) بديلة عن الـ alert() -->
+  <div id="custom-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
+      <div id="modal-icon" class="w-12 h-12 rounded-full mx-auto flex items-center justify-center text-2xl"></div>
+      <h3 id="modal-title" class="font-black text-lg text-slate-800"></h3>
+      <p id="modal-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+      <div id="modal-actions" class="flex items-center justify-center gap-3 pt-2"></div>
+    </div>
+  </div>
+
+  <!-- تذييل الصفحة -->
+  <footer class="mt-auto bg-slate-100 border-t border-slate-200 py-4 text-center text-xs text-slate-500 no-print">
+    <p>© منصة الاختبارات التفاعلية لقواعد اللغة الإنجليزية - مصممة لتعليم أساليب المقارنة والتفضيل بسهولة ومتعة.</p>
+  </footer>
+
+  <!-- كود الجافاسكربت لإدارة المنطق والتفاعل -->
+  <script>
+    // ==========================================
+    // 1. هيكل بيانات الأسئلة مستخرج بدقة من الصور
+    // ==========================================
+
+    // السؤال الأول: Choose the correct answer
+    const questionsQ1 = [
+      {
+        id: 1,
+        sentenceStart: "Ali is",
+        sentenceEnd: "than Omar.",
+        options: ["tall", "taller", "tallest", "more tall"],
+        correct: "taller",
+        rule: "الصفة قصيرة (tall) + المقارنة بين طرفين مع كلمة than تتطلب إضافة -er تصبح (taller)."
+      },
+      {
+        id: 2,
+        sentenceStart: "My bag is",
+        sentenceEnd: "than your bag.",
+        options: ["heavy", "heaviest", "heavier", "more heavy"],
+        correct: "heavier",
+        rule: "الصفة تنتهي بـ y وقبلها حرف ساكن (heavy)، تُقلب y إلى i ويضاف -er فتصبح (heavier)."
+      },
+      {
+        id: 3,
+        sentenceStart: "A rabbit is",
+        sentenceEnd: "than a tortoise.",
+        options: ["fastest", "faster", "fast", "more fast"],
+        correct: "faster",
+        rule: "صفة قصيرة من مقطع واحد (fast) + than تتطلب إضافة -er فقط تصبح (faster)."
+      },
+      {
+        id: 4,
+        sentenceStart: "Sara is",
+        sentenceEnd: "in reading than Huda.",
+        options: ["interested", "most interested", "more interested", "interest"],
+        correct: "more interested",
+        rule: "الصفة طويلة ذات مقاطع متعددة (interested) + وجود than، نستخدم (more + adjective)."
+      },
+      {
+        id: 5,
+        sentenceStart: "This book is",
+        sentenceEnd: "than that one.",
+        options: ["interesting", "interest", "most interesting", "more interesting"],
+        correct: "more interesting",
+        rule: "الصفة متعددة المقاطع (interesting) عند المقارنة مع than تأخذ (more interesting)."
+      },
+      {
+        id: 6,
+        sentenceStart: "A camel is",
+        sentenceEnd: "than a goat.",
+        options: ["bigger", "biggest", "big", "more big"],
+        correct: "bigger",
+        rule: "الصفة تنتهي بـ (ساكن - علة - ساكن: b-i-g)، نضاعف الحرف الأخير ونضيف -er تصبح (bigger)."
+      },
+      {
+        id: 7,
+        sentenceStart: "English is",
+        sentenceEnd: "than Science for me.",
+        options: ["easy", "easiest", "easier", "more easy"],
+        correct: "easier",
+        rule: "الصفة المنتهية بـ y مثل (easy) تُقلب إلى i ثم يضاف -er فتصبح (easier)."
+      },
+      {
+        id: 8,
+        sentenceStart: "Today is",
+        sentenceEnd: "than yesterday.",
+        options: ["hot", "hottest", "more hot", "hotter"],
+        correct: "hotter",
+        rule: "صفة ذات مقطع واحد تنتهي بحرف ساكن مسبوق بعلة واحد (h-o-t)، نضاعف t ونضيف -er تصبح (hotter)."
+      }
+    ];
+
+    // السؤال الثاني: Complete the sentences using correct comparative form
+    const questionsQ2 = [
+      {
+        id: 1,
+        sentenceStart: "A lion is",
+        sentenceEnd: "than a cat.",
+        targetAdj: "strong",
+        correct: "stronger",
+        rule: "الصفة (strong) صفة قصيرة تأخذ er لتصبح (stronger)."
+      },
+      {
+        id: 2,
+        sentenceStart: "My brother is",
+        sentenceEnd: "than me.",
+        targetAdj: "old",
+        correct: "older",
+        rule: "الصفة (old) صفة قصيرة تأخذ er لتصبح (older)."
+      },
+      {
+        id: 3,
+        sentenceStart: "This puzzle is",
+        sentenceEnd: "than the last one.",
+        targetAdj: "difficult",
+        correct: "more difficult",
+        rule: "الصفة (difficult) طويلة وتتكون من 3 مقاطع، صيغة مقارنتها هي (more difficult)."
+      },
+      {
+        id: 4,
+        sentenceStart: "A car is",
+        sentenceEnd: "than a bicycle.",
+        targetAdj: "fast",
+        correct: "faster",
+        rule: "الصفة (fast) مقطع واحد تأخذ er لتصبح (faster)."
+      },
+      {
+        id: 5,
+        sentenceStart: "English is",
+        sentenceEnd: "than Math.",
+        targetAdj: "interesting",
+        correct: "more interesting",
+        rule: "الصفة (interesting) طويلة، صيغة المقارنة تسبق بـ more فتصبح (more interesting)."
+      },
+      {
+        id: 6,
+        sentenceStart: "The blue whale is",
+        sentenceEnd: "than an elephant.",
+        targetAdj: "heavy",
+        correct: "heavier",
+        rule: "الصفة (heavy) تنتهي بـ y تُقلب إلى i مع إضافة er فتصبح (heavier)."
+      },
+      {
+        id: 7,
+        sentenceStart: "My house is",
+        sentenceEnd: "than yours.",
+        targetAdj: "big",
+        correct: "bigger",
+        rule: "الصفة (big) يُضاعف الحرف الأخير g مع إضافة er لتصبح (bigger)."
+      },
+      {
+        id: 8,
+        sentenceStart: "This story is",
+        sentenceEnd: "than the other story.",
+        targetAdj: "exciting",
+        correct: "more exciting",
+        rule: "الصفة (exciting) صفة طويلة تأخذ more فتصبح (more exciting)."
+      }
+    ];
+
+    // السؤال الثالث: الجدول (10 صفات)
+    const questionsQ3 = [
+      { id: 1, adj: "Long", comp: "longer", sup: "longest", supWithThe: "the longest", rule: "صفة قصيرة: يضاف er للمقارنة و est للتفضيل." },
+      { id: 2, adj: "Tall", comp: "taller", sup: "tallest", supWithThe: "the tallest", rule: "صفة قصيرة: يضاف er للمقارنة و est للتفضيل." },
+      { id: 3, adj: "Young", comp: "younger", sup: "youngest", supWithThe: "the youngest", rule: "صفة قصيرة: يضاف er للمقارنة و est للتفضيل." },
+      { id: 4, adj: "Fast", comp: "faster", sup: "fastest", supWithThe: "the fastest", rule: "صفة قصيرة: يضاف er للمقارنة و est للتفضيل." },
+      { id: 5, adj: "Heavy", comp: "heavier", sup: "heaviest", supWithThe: "the heaviest", rule: "تنتهي بـ y مسبوقة بساكن: تقلب إلى ier ثم iest." },
+      { id: 6, adj: "Easy", comp: "easier", sup: "easiest", supWithThe: "the easiest", rule: "تنتهي بـ y مسبوقة بساكن: تقلب إلى ier ثم iest." },
+      { id: 7, adj: "interesting", comp: "more interesting", sup: "most interesting", supWithThe: "the most interesting", rule: "صفة طويلة: تأخذ more للمقارنة و most للتفضيل." },
+      { id: 8, adj: "beautiful", comp: "more beautiful", sup: "most beautiful", supWithThe: "the most beautiful", rule: "صفة طويلة: تأخذ more للمقارنة و most للتفضيل." },
+      { id: 9, adj: "difficult", comp: "more difficult", sup: "most difficult", supWithThe: "the most difficult", rule: "صفة طويلة: تأخذ more للمقارنة و most للتفضيل." },
+      { id: 10, adj: "exciting", comp: "more exciting", sup: "most exciting", supWithThe: "the most exciting", rule: "صفة طويلة: تأخذ more للمقارنة و most للتفضيل." }
+    ];
+
+    // ==========================================
+    // 2. حالة الاختبار الحالية (State Management)
+    // ==========================================
+    const userAnswers = {
+      q1: {}, // id -> selectedValue
+      q2: {}, // id -> textValue
+      q3: {}  // id -> { comp: '', sup: '' }
+    };
+
+    // تجهيز كائنات الجدول
+    questionsQ3.forEach(q => {
+      userAnswers.q3[q.id] = { comp: '', sup: '' };
+    });
+
+    // ==========================================
+    // 3. بناء واجهة المستخدم عند التحميل
+    // ==========================================
+    window.onload = function() {
+      renderExercise1();
+      renderExercise2();
+      renderExercise3();
+      renderNavigationPanel();
+      updateProgress();
+    };
+
+    // رسم السؤال الأول
+    function renderExercise1() {
+      const container = document.getElementById('ex1-questions-list');
+      container.innerHTML = questionsQ1.map((q, idx) => `
+        <div id="q1-item-${q.id}" class="p-4 rounded-xl bg-amber-50/40 border border-amber-200/60 transition-all hover:bg-amber-50/70" dir="ltr">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 flex-shrink-0 bg-amber-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-xs">${idx + 1}</span>
+            <div class="flex-grow space-y-3 text-left">
+              <p class="en-text text-base md:text-lg font-bold text-slate-800 flex flex-wrap items-center gap-1.5 leading-relaxed">
+                <span>${q.sentenceStart}</span>
+                <span id="q1-fill-${q.id}" class="inline-block min-w-20 px-2 py-0.5 border-b-2 border-amber-500 text-amber-700 font-bold text-center bg-white rounded">........</span>
+                <span>${q.sentenceEnd}</span>
+              </p>
+              
+              <!-- الخيارات الأربعة -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                ${q.options.map((opt, optIdx) => {
+                  const letters = ['a', 'b', 'c', 'd'];
+                  return `
+                    <label class="cursor-pointer border border-slate-200 hover:border-amber-400 bg-white hover:bg-amber-50/50 rounded-xl p-2.5 flex items-center gap-2 transition duration-150">
+                      <input type="radio" name="q1_option_${q.id}" value="${opt}" onchange="selectQ1Option(${q.id}, '${opt}')" class="text-amber-500 focus:ring-amber-400 h-4 w-4">
+                      <div class="flex items-center gap-1.5 text-sm en-text font-semibold text-slate-700">
+                        <span class="w-5 h-5 bg-amber-100 text-amber-800 rounded-full text-xs flex items-center justify-center font-bold">${letters[optIdx]}</span>
+                        <span>${opt}</span>
+                      </div>
+                    </label>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // رسم السؤال الثاني
+    function renderExercise2() {
+      const container = document.getElementById('ex2-questions-list');
+      container.innerHTML = questionsQ2.map((q, idx) => `
+        <div id="q2-item-${q.id}" class="p-3.5 md:p-4 rounded-xl bg-amber-50/40 border border-amber-200/60 transition-all hover:bg-amber-50/70" dir="ltr">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 flex-shrink-0 bg-amber-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-xs">${idx + 1}</span>
+            <div class="flex-grow flex flex-wrap items-center gap-2 text-slate-800 text-sm md:text-base en-text font-semibold text-left">
+              <span>${q.sentenceStart}</span>
+              <div class="relative inline-block">
+                <input type="text" 
+                       id="q2-input-${q.id}" 
+                       placeholder="type here..." 
+                       oninput="handleQ2Input(${q.id}, this.value)"
+                       autocomplete="off"
+                       class="en-text text-sm md:text-base font-bold bg-white border border-amber-300 rounded-lg px-3 py-1.5 w-44 md:w-52 focus:ring-2 focus:ring-amber-500 focus:outline-none text-slate-800">
+              </div>
+              <span>${q.sentenceEnd}</span>
+              <span class="text-xs font-bold text-amber-700 bg-amber-100/80 px-2.5 py-1 rounded-md border border-amber-200">(${q.targetAdj})</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // رسم السؤال الثالث
+    function renderExercise3() {
+      const tbody = document.getElementById('ex3-table-body');
+      tbody.innerHTML = questionsQ3.map((q) => `
+        <tr class="hover:bg-amber-100/30 transition-colors">
+          <td class="p-2.5 font-bold text-slate-800 en-text border-r border-amber-200">${q.adj}</td>
+          <td class="p-2.5 border-r border-amber-200">
+            <input type="text" 
+                   id="q3-comp-${q.id}" 
+                   placeholder="Comparative..." 
+                   oninput="handleQ3Input(${q.id}, 'comp', this.value)"
+                   autocomplete="off"
+                   class="en-text w-full text-sm font-semibold bg-white border border-amber-200 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          </td>
+          <td class="p-2.5">
+            <input type="text" 
+                   id="q3-sup-${q.id}" 
+                   placeholder="Superlative..." 
+                   oninput="handleQ3Input(${q.id}, 'sup', this.value)"
+                   autocomplete="off"
+                   class="en-text w-full text-sm font-semibold bg-white border border-amber-200 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // رسم لوحة التنقل بين الأسئلة (Navigation)
+    function renderNavigationPanel() {
+      // أزرار السؤال 1
+      const g1 = document.getElementById('nav-q1-grid');
+      g1.innerHTML = questionsQ1.map((q, idx) => `
+        <button id="nav-btn-q1-${q.id}" onclick="scrollToElement('q1-item-${q.id}')" class="h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 transition">
+          1.${idx + 1}
+        </button>
+      `).join('');
+
+      // أزرار السؤال 2
+      const g2 = document.getElementById('nav-q2-grid');
+      g2.innerHTML = questionsQ2.map((q, idx) => `
+        <button id="nav-btn-q2-${q.id}" onclick="scrollToElement('q2-item-${q.id}')" class="h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-600 transition">
+          2.${idx + 1}
+        </button>
+      `).join('');
+
+      // أزرار السؤال 3 (10 صفات بمجموع 20 حقلاً)
+      const g3 = document.getElementById('nav-q3-grid');
+      g3.innerHTML = questionsQ3.map((q, idx) => `
+        <button id="nav-btn-q3-${q.id}" onclick="scrollToElement('section-3')" class="h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-[11px] font-bold text-slate-600 transition" title="${q.adj}">
+          3.${idx + 1}
+        </button>
+      `).join('');
+    }
+
+    // التنقل السلس عند الضغط على زر في لوحة الأسئلة
+    function scrollToElement(elemId) {
+      const el = document.getElementById(elemId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('ring-2', 'ring-amber-500');
+        setTimeout(() => el.classList.remove('ring-2', 'ring-amber-500'), 1500);
+      }
+    }
+
+    // ==========================================
+    // 4. معالجة إدخالات المستخدم والتحقق منها
+    // ==========================================
+    function selectQ1Option(id, val) {
+      userAnswers.q1[id] = val;
+      const fillSpan = document.getElementById(`q1-fill-${id}`);
+      if (fillSpan) {
+        fillSpan.innerText = val;
+        fillSpan.classList.add('text-amber-800', 'font-black');
+      }
+      // تلوين زر اللوحة
+      const navBtn = document.getElementById(`nav-btn-q1-${id}`);
+      if (navBtn) {
+        navBtn.classList.remove('bg-slate-100', 'text-slate-600');
+        navBtn.classList.add('bg-amber-500', 'text-white');
+      }
+      updateProgress();
+    }
+
+    function handleQ2Input(id, val) {
+      userAnswers.q2[id] = val.trim();
+      const navBtn = document.getElementById(`nav-btn-q2-${id}`);
+      if (navBtn) {
+        if (val.trim().length > 0) {
+          navBtn.classList.remove('bg-slate-100', 'text-slate-600');
+          navBtn.classList.add('bg-amber-500', 'text-white');
+        } else {
+          navBtn.classList.add('bg-slate-100', 'text-slate-600');
+          navBtn.classList.remove('bg-amber-500', 'text-white');
+        }
+      }
+      updateProgress();
+    }
+
+    function handleQ3Input(id, field, val) {
+      if (!userAnswers.q3[id]) userAnswers.q3[id] = {};
+      userAnswers.q3[id][field] = val.trim();
+
+      const navBtn = document.getElementById(`nav-btn-q3-${id}`);
+      const bothDone = (userAnswers.q3[id].comp && userAnswers.q3[id].comp.length > 0) &&
+                       (userAnswers.q3[id].sup && userAnswers.q3[id].sup.length > 0);
+      const halfDone = (userAnswers.q3[id].comp && userAnswers.q3[id].comp.length > 0) ||
+                       (userAnswers.q3[id].sup && userAnswers.q3[id].sup.length > 0);
+
+      if (navBtn) {
+        if (bothDone) {
+          navBtn.className = "h-7 rounded-lg bg-amber-500 text-white text-[11px] font-bold transition";
+        } else if (halfDone) {
+          navBtn.className = "h-7 rounded-lg bg-amber-200 text-amber-900 text-[11px] font-bold transition";
+        } else {
+          navBtn.className = "h-7 rounded-lg bg-slate-100 text-slate-600 text-[11px] font-bold transition";
+        }
+      }
+      updateProgress();
+    }
+
+    // تحديث مؤشر الإنجاز
+    function updateProgress() {
+      const q1Count = Object.keys(userAnswers.q1).length;
+      const q2Count = Object.values(userAnswers.q2).filter(v => v && v.length > 0).length;
+      
+      let q3CellsCount = 0;
+      Object.values(userAnswers.q3).forEach(item => {
+        if (item.comp && item.comp.length > 0) q3CellsCount++;
+        if (item.sup && item.sup.length > 0) q3CellsCount++;
+      });
+
+      const totalAnswered = q1Count + q2Count + q3CellsCount;
+      const totalPossible = 8 + 8 + 20; // 36
+
+      document.getElementById('header-answered-count').innerText = totalAnswered;
+      const pct = Math.round((totalAnswered / totalPossible) * 100);
+      document.getElementById('header-progress-bar').style.width = `${pct}%`;
+
+      document.getElementById('nav-q1-count').innerText = `${q1Count}/8`;
+      document.getElementById('nav-q2-count').innerText = `${q2Count}/8`;
+      document.getElementById('nav-q3-count').innerText = `${q3CellsCount}/20`;
+    }
+
+    // تنظيف الإجابة للمقارنة الذكية (إزالة الفراغات الزائدة وتوحيد حالة الأحرف)
+    function sanitize(str) {
+      if (!str) return '';
+      return str.trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    // ==========================================
+    // 5. تصحيح الاختبار وحساب الدرجة والتحفيز
+    // ==========================================
+    function submitQuiz() {
+      // فحص إذا كان هناك أسئلة شاغرة
+      const q1Count = Object.keys(userAnswers.q1).length;
+      const q2Count = Object.values(userAnswers.q2).filter(v => v && v.length > 0).length;
+      let q3CellsCount = 0;
+      Object.values(userAnswers.q3).forEach(item => {
+        if (item.comp && item.comp.length > 0) q3CellsCount++;
+        if (item.sup && item.sup.length > 0) q3CellsCount++;
+      });
+
+      const totalAnswered = q1Count + q2Count + q3CellsCount;
+      if (totalAnswered < 36) {
+        showModal({
+          icon: '<i class="fa-solid fa-triangle-exclamation text-amber-500"></i>',
+          iconBg: 'bg-amber-100',
+          title: 'هل ترغب في التسليم الآن؟',
+          desc: `لقد قمت بحل ${totalAnswered} من أصل 36 مطلوباً. هناك فقرات لم تتم الإجابة عليها بعد. هل أنت متأكد من رغبتك في تسليم الاختبار؟`,
+          buttons: `
+            <button onclick="closeModal(); processResults();" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm">نعم، تسليم النتيجة</button>
+            <button onclick="closeModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-sm">متابعة الحل</button>
+          `
+        });
+      } else {
+        processResults();
+      }
+    }
+
+    function processResults() {
+      let scoreQ1 = 0;
+      let scoreQ2 = 0;
+      let scoreQ3 = 0;
+
+      // 1. تصحيح السؤال 1
+      const feedbackQ1 = questionsQ1.map(q => {
+        const userChoice = userAnswers.q1[q.id] || "لم يتم الحل";
+        const isCorrect = sanitize(userChoice) === sanitize(q.correct);
+        if (isCorrect) scoreQ1 += 1;
+        return { ...q, userChoice, isCorrect };
+      });
+
+      // 2. تصحيح السؤال 2
+      const feedbackQ2 = questionsQ2.map(q => {
+        const userInput = userAnswers.q2[q.id] || "";
+        const isCorrect = sanitize(userInput) === sanitize(q.correct);
+        if (isCorrect) scoreQ2 += 1;
+        return { ...q, userInput: userInput || "لم يُجب", isCorrect };
+      });
+
+      // 3. تصحيح السؤال 3 (نقطة للمقارنة ونقطة للتفضيل لكل صفة)
+      const feedbackQ3 = questionsQ3.map(q => {
+        const userComp = (userAnswers.q3[q.id] && userAnswers.q3[q.id].comp) || "";
+        const userSup = (userAnswers.q3[q.id] && userAnswers.q3[q.id].sup) || "";
+
+        const compCorrect = sanitize(userComp) === sanitize(q.comp);
+        // التفضيل يقبل كتابته مع the أو بدون the
+        const supSanitized = sanitize(userSup);
+        const supCorrect = (supSanitized === sanitize(q.sup)) || (supSanitized === sanitize(q.supWithThe));
+
+        if (compCorrect) scoreQ3 += 1;
+        if (supCorrect) scoreQ3 += 1;
+
+        return {
+          ...q,
+          userComp: userComp || "لم يُجب",
+          userSup: userSup || "لم يُجب",
+          compCorrect,
+          supCorrect
+        };
+      });
+
+      const totalScore = scoreQ1 + scoreQ2 + scoreQ3;
+      const totalPossible = 36;
+      const percentage = Math.round((totalScore / totalPossible) * 100);
+
+      displayResultsView({
+        totalScore,
+        totalPossible,
+        percentage,
+        scoreQ1,
+        scoreQ2,
+        scoreQ3,
+        feedbackQ1,
+        feedbackQ2,
+        feedbackQ3
+      });
+    }
+
+    function displayResultsView(res) {
+      // إخفاء حاوية الأسئلة وعرض حاوية النتائج
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('student-meta-card').classList.add('hidden');
+      const resultView = document.getElementById('result-view');
+      resultView.classList.remove('hidden');
+
+      // اسم الطالب
+      const sName = document.getElementById('studentNameInput').value.trim();
+      const displayNameElem = document.getElementById('student-display-name');
+      if (sName) {
+        displayNameElem.innerText = `النتيجة المعتمدة للطالب/ـة: ${sName}`;
+      } else {
+        displayNameElem.innerText = `النتيجة المعتمدة للاختبار الذاتي`;
+      }
+
+      // الأرقام
+      document.getElementById('final-score-num').innerText = res.totalScore;
+      document.getElementById('final-percentage-num').innerText = `${res.percentage}%`;
+      document.getElementById('subscore-q1').innerText = `${res.scoreQ1} / 8`;
+      document.getElementById('subscore-q2').innerText = `${res.scoreQ2} / 8`;
+      document.getElementById('subscore-q3').innerText = `${res.scoreQ3} / 20`;
+
+      // التقدير والتحفيز والأيقونة
+      const iconContainer = document.getElementById('score-badge-icon');
+      const rankText = document.getElementById('final-rank-text');
+      const motivationBox = document.getElementById('motivation-box');
+      const greeting = document.getElementById('result-greeting');
+
+      if (res.percentage >= 90) {
+        greeting.innerText = "🌟 أداء استثنائي ومبهر!";
+        rankText.innerText = "ممتاز مرتفع (Excellent)";
+        iconContainer.className = "w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-4xl shadow-inner bg-emerald-100 text-emerald-600";
+        iconContainer.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+        motivationBox.className = "p-4 rounded-xl text-emerald-900 bg-emerald-50 border border-emerald-200 text-center";
+        motivationBox.innerHTML = `
+          <p class="font-bold text-base md:text-lg mb-1">تبارك الرحمن! تمكنت من استيعاب قواعد الـ Comparative و Superlative بجدارة تامة!</p>
+          <p class="text-xs md:text-sm text-emerald-700">لقد أظهرت إتقاناً رائعاً لتصريف الصفات القصيرة والطويلة وحالات الشواذ والإملاء بدقة متناهية. استمر بهذا الشغف والتميز!</p>
+        `;
+        triggerCelebration();
+      } else if (res.percentage >= 75) {
+        greeting.innerText = "👏 عمل رائع جداً!";
+        rankText.innerText = "جيد جداً (Very Good)";
+        iconContainer.className = "w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-4xl shadow-inner bg-teal-100 text-teal-600";
+        iconContainer.innerHTML = '<i class="fa-solid fa-medal"></i>';
+        motivationBox.className = "p-4 rounded-xl text-teal-900 bg-teal-50 border border-teal-200 text-center";
+        motivationBox.innerHTML = `
+          <p class="font-bold text-base md:text-lg mb-1">مستوى متميز وإجابات واثقة!</p>
+          <p class="text-xs md:text-sm text-teal-700">لديك فهم قوي لقواعد المقارنة، تفصلك خطوات يسيرة جداً عن الدرجة الكاملة. راجع الملاحظات بالأسفل لتفادي الأخطاء البسيطة في المرات القادمة.</p>
+        `;
+        triggerSoftCelebration();
+      } else if (res.percentage >= 50) {
+        greeting.innerText = "👍 بداية طيبة ومجهود جيد!";
+        rankText.innerText = "جيد (Good)";
+        iconContainer.className = "w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-4xl shadow-inner bg-amber-100 text-amber-600";
+        iconContainer.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+        motivationBox.className = "p-4 rounded-xl text-amber-900 bg-amber-50 border border-amber-200 text-center";
+        motivationBox.innerHTML = `
+          <p class="font-bold text-base md:text-lg mb-1">أحسنت المحاولة ولديك رصيد معرفي جيد!</p>
+          <p class="text-xs md:text-sm text-amber-800">تحتاج إلى تركيز أكبر على التفريق بين الصفات القصيرة (er/est) والصفات الطويلة (more/most) وتغيير حرف y إلى i. راجع التغذية الراجعة بتأنٍ وستصل للقمة قريباً!</p>
+        `;
+      } else {
+        greeting.innerText = "💪 لا تستسلم، أنت قادر على التعلم!";
+        rankText.innerText = "يحتاج إلى تدريب إضافي";
+        iconContainer.className = "w-20 h-20 mx-auto rounded-3xl flex items-center justify-center text-4xl shadow-inner bg-rose-100 text-rose-600";
+        iconContainer.innerHTML = '<i class="fa-solid fa-seedling"></i>';
+        motivationBox.className = "p-4 rounded-xl text-slate-800 bg-slate-50 border border-slate-200 text-center";
+        motivationBox.innerHTML = `
+          <p class="font-bold text-base md:text-lg mb-1">الخطأ هو الخطوة الأولى لاكتساب المعرفة الحقيقية!</p>
+          <p class="text-xs md:text-sm text-slate-600">اقرأ الشرح وقواعد الحل الموضحة في قسم التغذية الراجعة أسفل هذه النتيجة، ثم أعد المحاولة، فالتكرار يصنع المعجزات!</p>
+        `;
+      }
+
+      // بناء قائمة التغذية الراجعة
+      renderFeedbackSections(res);
+
+      // التمرير السلس لأعلى شاشة النتيجة
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // بناء واجهة التغذية الراجعة التفصيلية
+    function renderFeedbackSections(res) {
+      // 1. السؤال 1
+      const q1Container = document.getElementById('feedback-q1-list');
+      q1Container.innerHTML = res.feedbackQ1.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border ${item.isCorrect ? 'bg-emerald-50/40 border-emerald-200' : 'bg-rose-50/40 border-rose-200'}">
+          <div class="flex items-start justify-between gap-3">
+            <div class="space-y-1 w-full text-right">
+              <div class="flex items-center gap-2 en-text text-sm font-bold text-slate-800" dir="ltr">
+                <span class="w-5 h-5 rounded-full ${item.isCorrect ? 'bg-emerald-500' : 'bg-rose-500'} text-white text-xs flex items-center justify-center">${idx + 1}</span>
+                <span>${item.sentenceStart} _______ ${item.sentenceEnd}</span>
+              </div>
+              <div class="text-xs flex flex-wrap gap-4 pt-1">
+                <span>إجابتك: <strong class="en-inline font-bold ${item.isCorrect ? 'text-emerald-700' : 'text-rose-600'}">${item.userChoice}</strong></span>
+                <span>الإجابة الصحيحة: <strong class="en-inline font-bold text-emerald-700">${item.correct}</strong></span>
+              </div>
+              <div class="text-[11px] text-slate-600 pt-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-info text-amber-500"></i>
+                <span><strong>القاعدة:</strong> ${item.rule}</span>
+              </div>
+            </div>
+            <div>
+              ${item.isCorrect ? 
+                '<span class="text-emerald-600 text-lg"><i class="fa-solid fa-circle-check"></i></span>' : 
+                '<span class="text-rose-500 text-lg"><i class="fa-solid fa-circle-xmark"></i></span>'
+              }
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 2. السؤال 2
+      const q2Container = document.getElementById('feedback-q2-list');
+      q2Container.innerHTML = res.feedbackQ2.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border ${item.isCorrect ? 'bg-emerald-50/40 border-emerald-200' : 'bg-rose-50/40 border-rose-200'}">
+          <div class="flex items-start justify-between gap-3">
+            <div class="space-y-1 w-full text-right">
+              <div class="flex items-center gap-2 en-text text-sm font-bold text-slate-800" dir="ltr">
+                <span class="w-5 h-5 rounded-full ${item.isCorrect ? 'bg-emerald-500' : 'bg-rose-500'} text-white text-xs flex items-center justify-center">${idx + 1}</span>
+                <span>${item.sentenceStart} _______ ${item.sentenceEnd} (${item.targetAdj})</span>
+              </div>
+              <div class="text-xs flex flex-wrap gap-4 pt-1">
+                <span>إجابتك: <strong class="en-inline font-bold ${item.isCorrect ? 'text-emerald-700' : 'text-rose-600'}">${item.userInput}</strong></span>
+                <span>الصحيح: <strong class="en-inline font-bold text-emerald-700">${item.correct}</strong></span>
+              </div>
+              <div class="text-[11px] text-slate-600 pt-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-info text-amber-500"></i>
+                <span><strong>القاعدة:</strong> ${item.rule}</span>
+              </div>
+            </div>
+            <div>
+              ${item.isCorrect ? 
+                '<span class="text-emerald-600 text-lg"><i class="fa-solid fa-circle-check"></i></span>' : 
+                '<span class="text-rose-500 text-lg"><i class="fa-solid fa-circle-xmark"></i></span>'
+              }
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 3. السؤال 3 (جدول التغذية الراجعة)
+      const q3Container = document.getElementById('feedback-q3-list');
+      q3Container.innerHTML = `
+        <table class="w-full text-left border-collapse text-xs md:text-sm" dir="ltr">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+              <th class="p-2.5 font-bold en-text border-r border-slate-200 text-left">Adjective</th>
+              <th class="p-2.5 font-bold en-text border-r border-slate-200 text-left">Comparative (إجابتك / النموذجية)</th>
+              <th class="p-2.5 font-bold en-text border-r border-slate-200 text-left">Superlative (إجابتك / النموذجية)</th>
+              <th class="p-2.5 font-bold text-right" dir="rtl">القاعدة التوضيحية</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            ${res.feedbackQ3.map(item => `
+              <tr class="hover:bg-slate-50">
+                <td class="p-2.5 font-bold en-text text-slate-800 border-r border-slate-100">${item.adj}</td>
+                
+                <!-- عمود المقارنة -->
+                <td class="p-2.5 border-r border-slate-100">
+                  <div class="flex items-center gap-1.5">
+                    <span class="en-text font-bold ${item.compCorrect ? 'text-emerald-600' : 'text-rose-600'}">${item.userComp}</span>
+                    ${item.compCorrect ? 
+                      '<i class="fa-solid fa-check text-emerald-500 text-xs"></i>' : 
+                      `<span class="en-text text-emerald-700 font-semibold">(الصحيح: ${item.comp})</span>`
+                    }
+                  </div>
+                </td>
+
+                <!-- عمود التفضيل -->
+                <td class="p-2.5 border-r border-slate-100">
+                  <div class="flex items-center gap-1.5">
+                    <span class="en-text font-bold ${item.supCorrect ? 'text-emerald-600' : 'text-rose-600'}">${item.userSup}</span>
+                    ${item.supCorrect ? 
+                      '<i class="fa-solid fa-check text-emerald-500 text-xs"></i>' : 
+                      `<span class="en-text text-emerald-700 font-semibold">(الصحيح: ${item.sup})</span>`
+                    }
+                  </div>
+                </td>
+
+                <td class="p-2.5 text-slate-500 text-[11px] leading-tight text-right" dir="rtl">${item.rule}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function scrollToFeedback() {
+      document.getElementById('detailed-feedback-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // إعادة أداء الاختبار
+    function retakeQuiz() {
+      showModal({
+        icon: '<i class="fa-solid fa-arrows-rotate text-amber-500"></i>',
+        iconBg: 'bg-amber-100',
+        title: 'إعادة الاختبار',
+        desc: 'هل تود تصفير كافة الإجابات وإعادة حل الأسئلة من جديد؟',
+        buttons: `
+          <button onclick="closeModal(); hardReset();" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold text-sm">نعم، تصفير الإجابات</button>
+          <button onclick="closeModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-sm">إلغاء</button>
+        `
+      });
+    }
+
+    function resetQuizPrompt() {
+      showModal({
+        icon: '<i class="fa-solid fa-triangle-exclamation text-rose-500"></i>',
+        iconBg: 'bg-rose-100',
+        title: 'إعادة تعيين الأسئلة',
+        desc: 'سيتم مسح كل ما كتبته في الصفحة والبدء من جديد، هل تريد الاستمرار؟',
+        buttons: `
+          <button onclick="closeModal(); hardReset();" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-sm">نعم، أعد التعيين</button>
+          <button onclick="closeModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-sm">تراجع</button>
+        `
+      });
+    }
+
+    function hardReset() {
+      // تفريغ البيانات
+      userAnswers.q1 = {};
+      userAnswers.q2 = {};
+      questionsQ3.forEach(q => {
+        userAnswers.q3[q.id] = { comp: '', sup: '' };
+      });
+
+      // إعادة رسم العناصر
+      renderExercise1();
+      renderExercise2();
+      renderExercise3();
+      renderNavigationPanel();
+      updateProgress();
+
+      // إعادة عرض الأسئلة
+      document.getElementById('quiz-container').classList.remove('hidden');
+      document.getElementById('student-meta-card').classList.remove('hidden');
+      document.getElementById('result-view').classList.add('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 6. تأثيرات المؤثرات التفاعلية والاحتفالية
+    // ==========================================
+    function triggerCelebration() {
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = { origin: { y: 0.7 } };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+      }
+    }
+
+    function triggerSoftCelebration() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    // ==========================================
+    // 7. إدارة النافذة المنبثقة المخصصة (Modal)
+    // ==========================================
+    function showModal({ icon, iconBg, title, desc, buttons }) {
+      const modal = document.getElementById('custom-modal');
+      const iconEl = document.getElementById('modal-icon');
+      iconEl.className = `w-12 h-12 rounded-full mx-auto flex items-center justify-center text-2xl ${iconBg}`;
+      iconEl.innerHTML = icon;
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-desc').innerText = desc;
+      document.getElementById('modal-actions').innerHTML = buttons;
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('custom-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
